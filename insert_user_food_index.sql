@@ -1,4 +1,4 @@
-
+use weight_tracker
 insert into Users (Username, passwords, email)
 values 
 ('S2jriStS7mKdRhjHJt0V','iYroVq3hGyZYXBeKf0mKQv','gS4VltlQIZPe9xgDmeHB@gmail.com'),
@@ -21,6 +21,7 @@ values
 ('Qa2gGVsWu6JQrneUxYvo','xafYUjRIv1EYmQLK4STXcgSA','8OR2cOC05hbcXX@yahoo.com'),
 ('5smAmQLK4STXcgSAhFi1','xNRxTjPVUdoQOkyVSrLXjPR3b','pyK8Ze8uoxwJeLnc@sis.hust.edu.vn'),
 ('HOkyVSrLXjPR3b4isiwc','fJUffwmdNHAEVSrLXjPR3b4isiw','VLDw3NRb6chVS5lY@sis.hust.edu.vn')
+
 
 
 
@@ -47,7 +48,7 @@ values
 ('Nguyen Xuan Mai','20','F','150','44',''),
 ('Nguyen Hoang','76','M','200','110','')
 
-insert into Food_list (Food, Calories)
+insert into Food_list([Food_name], [Calories])
 values    
 ('APPLE, RAW, WITH SKIN','52'),
 ('APPLE, RAW, WITHOUT SKIN','48'),
