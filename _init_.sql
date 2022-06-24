@@ -23,33 +23,35 @@ create table Body_index(
 );
 
 create table Food_list(
-	[Food] varchar(255) unique,
+	[FoodID] int identity(1,1),
+	[Food_name] varchar(255) not null,
 	[Calories] int not null, /* The average amount of taken calories for each 100g*/
-	constraint keyfood primary key ([Food])
+	constraint keyfood primary key ([FoodID])
 );
 
 create table Menu(
-	[MenuID] int unique,
-	[Food] varchar(255) not null,
+	[MenuID] int not null,
+	[FoodID] int not null,
 	[Amount] int not null, 
 	[Intake] int, /* Intake calories = Food(Calories) * Amount*/
 	constraint key_menu primary key ([MenuID]),
-	constraint foreign_food_key foreign key ([Food]) references Food_list([Food])
+	constraint foreign_food_key foreign key ([FoodID]) references Food_list([FoodID])
 );
 
 create table Activity_list(
-	[Activity] varchar(255) unique,
+	[ActivityID] int identity(1,1),
+	[Activity_name] varchar(255) not null,
 	[Calories] int not null, /* The average amount of burnt calories for each min*/
-	constraint keyact primary key ([Activity])
+	constraint keyact primary key ([ActivityID])
 );
 
 create table Workout(
-	[ExerciseID] int unique,
-	[Activity] varchar(255) not null,
+	[ExerciseID] int not null,
+	[ActivityID] int not null,
 	[Duration] int not null, /* time for each activity*/
 	[Outtake] int, /* Outtake = Activity * duration */
 	constraint key_workout primary key ([ExerciseID]),
-	constraint foreign_act_key foreign key ([Activity]) references Activity_list([Activity])
+	constraint foreign_act_key foreign key ([ActivityID]) references Activity_list([ActivityID])
 );
 
 create table Daily_record(
@@ -60,7 +62,8 @@ create table Daily_record(
 	[Calories_balance] int, /* Calo_balance = Sum(Intake) - Sum(Outtake)*/
 	constraint keyrecord primary key ([UserID], [Date]),
 	constraint foreignkey_daily foreign key ([UserID]) references Users([UserID]),
-	constraint foreignkey_menu foreign key ([MenuID]) references 
+	constraint foreignkey_menu foreign key ([MenuID]) references Menu([MenuID]),
+	constraint foreignkey_workout foreign key ([ExerciseID]) references Workout([ExerciseID])
 );
 
 create table Suggestions(
@@ -70,5 +73,13 @@ create table Suggestions(
 );
 
 create table Sort_tier(
-	
+	[UserID] int unique,
+	[Date] date not null,
+	[BMI] float not null,
+	[Calories_balance] int not null,
+	[Normal_cal_burn] int not null,
+	[Tier] int,
+	constraint key_sort primary key ([UserID],[DateID]),
+	constraint foreign_sort_index foreign key ([UserID]) references Body_index([UserID]),
+	constraint foreign_sort_daily foreign key ([UserID], [Date]) references Daily_record([UserID], [Date])
 );
