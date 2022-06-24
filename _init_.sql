@@ -29,6 +29,7 @@ create table Food_list(
 	constraint keyfood primary key ([FoodID])
 );
 
+
 create table Menu(
 	[MenuID] int not null,
 	[FoodID] int not null,
@@ -83,4 +84,3 @@ create table Sort_tier(
 	constraint foreign_sort_index foreign key ([UserID]) references Body_index([UserID]),
 	constraint foreign_sort_daily foreign key ([UserID], [Date]) references Daily_record([UserID], [Date])
 );
-drop database weight_tracker
