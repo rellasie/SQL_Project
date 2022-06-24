@@ -57,8 +57,8 @@ create table Workout(
 create table Daily_record(
 	[UserID] int,
 	[Date] date not null,
-	[MenuID] int identity(1,1),
-	[ExcerciseID] int identity(1,1),
+	[MenuID] int not null,
+	[ExerciseID] int not null,
 	[Calories_balance] int, /* Calo_balance = Sum(Intake) - Sum(Outtake)*/
 	constraint keyrecord primary key ([UserID], [Date]),
 	constraint foreignkey_daily foreign key ([UserID]) references Users([UserID]),
@@ -79,7 +79,8 @@ create table Sort_tier(
 	[Calories_balance] int not null,
 	[Normal_cal_burn] int not null,
 	[Tier] int,
-	constraint key_sort primary key ([UserID],[DateID]),
+	constraint key_sort primary key ([UserID],[Date]),
 	constraint foreign_sort_index foreign key ([UserID]) references Body_index([UserID]),
 	constraint foreign_sort_daily foreign key ([UserID], [Date]) references Daily_record([UserID], [Date])
 );
+drop database weight_tracker
