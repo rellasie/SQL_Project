@@ -18,9 +18,13 @@ create table Body_index(
 	[Age] int not null,
 	[Height] int not null,
 	[Weight] int not null,
-	[BMI] float,
+	[BMI] float, 
 	[TDEE] float not null,
-	Normal_cal_burn int
+	[Normal_cal_burn] int,
+	/* = (6.25*H + 10*W - 4.92*A + 5) * TDEE for male
+	= (6.25*H + 10*W - 4.92*A -95) * TDEE for female */
+	[Calories_balance] int, /*Update from the lastest daily record*/
+	[Tier] int, /* 1 - 2 - 3 - 4 - 5, also update from Calories_balance*/
 	constraint keyindex primary key ([UserID]),
 	constraint foreignkey1 foreign key ([UserID]) references Users([UserID])
 );
@@ -34,13 +38,12 @@ create table Food_list(
 
 
 create table Menu(
-	[Number] int identity(1,1),
 	[MenuID] int not null,
 	[FoodID] int not null,
 	[Amount] int not null, 
 	[Intake] int, /* Intake calories = Food(Calories) * Amount*/
-	constraint menu_key primary key ([Number]),
 );
+
 
 create table Activity_list(
 	[ActivityID] int identity(1,1),
@@ -50,7 +53,6 @@ create table Activity_list(
 );
 
 create table Workout(
-	[Number] int identity(1,1),
 	[ExerciseID] int not null,
 	[ActivityID] int not null,
 	[Duration] int not null, /* time for each activity*/
@@ -61,13 +63,10 @@ create table Workout(
 create table Daily_record(
 	[UserID] int,
 	[Date] date not null,
-	[MenuID] int not null,
-	[ExerciseID] int not null,
+	[MenuID] int not null, /*Can choose from menu list, or create a new one*/
+	[ExerciseID] int not null, /*Can choose from workout list, or create a new one*/
 	[Calories_balance] int, /* Calo_balance = Sum(Intake) - Sum(Outtake)*/
-	constraint keyrecord primary key ([UserID], [Date]),
-	/* constraint foreignkey_daily foreign key ([UserID]) references Users([UserID]),
-	constraint foreignkey_menu foreign key ([MenuID]) references Menu([MenuID]),
-	constraint foreignkey_workout foreign key ([ExerciseID]) references Workout([ExerciseID]) */
+	constraint keyrecord primary key ([UserID], [Date])
 );
 
 create table Suggestions(
@@ -75,16 +74,3 @@ create table Suggestions(
 	[Message] varchar(255),
 	constraint key_suggest primary key ([Tier])
 );
-
-create table Sort_tier(
-	[UserID] int unique,
-	[Date] date not null,
-	[BMI] float not null,
-	[Calories_balance] int not null,
-	[Normal_cal_burn] int not null,
-	[Tier] int,
-	constraint key_sort primary key ([UserID],[Date]),
-	constraint foreign_sort_index foreign key ([UserID]) references Body_index([UserID]),
-	constraint foreign_sort_daily foreign key ([UserID], [Date]) references Daily_record([UserID], [Date])
-);
-
