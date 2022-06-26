@@ -1,4 +1,5 @@
-INSERT INTO Activity_list ( Activity_name , Calories )
+use weight_tracker
+INSERT INTO Activity_list( [Activity_name] , [Calories] )
 VaLUES( 'Aerobic dancing (high impact) ', '7 '),
 ( 'Aerobic dancing (low impact) ', '5 '),
 ( 'Baseball/softball ', ' 5'),

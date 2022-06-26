@@ -1,5 +1,7 @@
-create database weight_tracker
-use weight_tracker
+create database weight_tracker /*Run this first*/
+use weight_tracker /*After that, run this*/
+
+/*Then run all lines below to create tables*/
 
 create table Users(
 	UserID int identity(1,1),
@@ -10,7 +12,8 @@ create table Users(
 );
 
 create table Body_index(
-	[UserID] int unique,
+	[UserID] int identity(1,1),
+	[Name] varchar (255) not null unique,
 	[Sex] bit not null, /* 1 represent male, 0 represent female*/
 	[Age] int not null,
 	[Height] int not null,
@@ -24,35 +27,35 @@ create table Body_index(
 
 create table Food_list(
 	[FoodID] int identity(1,1),
-	[Food_name] varchar(255) not null,
+	[Food_name] varchar(255) not null unique,
 	[Calories] int not null, /* The average amount of taken calories for each 100g*/
 	constraint keyfood primary key ([FoodID])
 );
 
 
 create table Menu(
+	[Number] int identity(1,1),
 	[MenuID] int not null,
 	[FoodID] int not null,
 	[Amount] int not null, 
 	[Intake] int, /* Intake calories = Food(Calories) * Amount*/
-	constraint key_menu primary key ([MenuID]),
-	constraint foreign_food_key foreign key ([FoodID]) references Food_list([FoodID])
+	constraint menu_key primary key ([Number]),
 );
 
 create table Activity_list(
 	[ActivityID] int identity(1,1),
-	[Activity_name] varchar(255) not null,
+	[Activity_name] varchar(255) not null unique,
 	[Calories] int not null, /* The average amount of burnt calories for each min*/
 	constraint keyact primary key ([ActivityID])
 );
 
 create table Workout(
+	[Number] int identity(1,1),
 	[ExerciseID] int not null,
 	[ActivityID] int not null,
 	[Duration] int not null, /* time for each activity*/
 	[Outtake] int, /* Outtake = Activity * duration */
-	constraint key_workout primary key ([ExerciseID]),
-	constraint foreign_act_key foreign key ([ActivityID]) references Activity_list([ActivityID])
+	constraint workout_key primary key ([Number])
 );
 
 create table Daily_record(
@@ -62,9 +65,9 @@ create table Daily_record(
 	[ExerciseID] int not null,
 	[Calories_balance] int, /* Calo_balance = Sum(Intake) - Sum(Outtake)*/
 	constraint keyrecord primary key ([UserID], [Date]),
-	constraint foreignkey_daily foreign key ([UserID]) references Users([UserID]),
+	/* constraint foreignkey_daily foreign key ([UserID]) references Users([UserID]),
 	constraint foreignkey_menu foreign key ([MenuID]) references Menu([MenuID]),
-	constraint foreignkey_workout foreign key ([ExerciseID]) references Workout([ExerciseID])
+	constraint foreignkey_workout foreign key ([ExerciseID]) references Workout([ExerciseID]) */
 );
 
 create table Suggestions(
@@ -84,3 +87,4 @@ create table Sort_tier(
 	constraint foreign_sort_index foreign key ([UserID]) references Body_index([UserID]),
 	constraint foreign_sort_daily foreign key ([UserID], [Date]) references Daily_record([UserID], [Date])
 );
+

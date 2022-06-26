@@ -1,3 +1,4 @@
+use weight_tracker
 INSERT INTO Menu (MenuID , FoodID , Amount) 
 VALUES('1','10','12'), 
 ('1','25','7'),
