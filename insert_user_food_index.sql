@@ -27,26 +27,27 @@ values
 
 insert into Body_index(name, age, sex, height, weight,TDEE)
 values
-('Bui Dieu linh','65','F','197','68',''),
-('Chi Van Linh','60','F','134','48',''),
-('Ly Thuan Nam','38','M','170','108',''),
-('Do Van Son','58','M','187','104',''),
-('Thanh Dat','88','M','164','58',''),
-('Nguyen Hoai Linh','96','F','130','63',''),
-('Nguyen Dieu Anh','52','F','185','120',''),
-('Bui Tien Thanh','62','M','170','70',''),
-('Pham Thu Trang','39','F','178','105',''),
-('Tran Lyn Lyn','16','F','161','60',''),
-('Tran Minh Ngoc','67','F','153','48',''),
-('Nguyen Thu Giang','29','F','158','54',''),
-('Vu Viet Bach','46','M','149','60',''),
-('Dong Gang Thep','30','M','157','60',''),
-('Nguyen Quoc Anh','11','M','156','41',''),
-('Bui Thao Nhi','69','F','164','90',''),
-('Bui Hoang Khanh','65','M','140','47',''),
-('Tran Hoang Anh','91','F','146','35',''),
-('Nguyen Xuan Mai','20','F','150','44',''),
-('Nguyen Hoang','76','M','200','110','')
+('Bui Dieu linh','65','0','197','68',''),
+('Chi Van Linh','60','0','134','48',''),
+('Ly Thuan Nam','38','1','170','108',''),
+('Do Van Son','58','1','187','104',''),
+('Thanh Dat','88','1','164','58',''),
+('Nguyen Hoai Linh','96','0','130','63',''),
+('Nguyen Dieu Anh','52','0','185','120',''),
+('Bui Tien Thanh','62','1','170','70',''),
+('Pham Thu Trang','39','0','178','105',''),
+('Tran Lyn Lyn','16','0','161','60',''),
+('Tran Minh Ngoc','67','0','153','48',''),
+('Nguyen Thu Giang','29','0','158','54',''),
+('Vu Viet Bach','46','1','149','60',''),
+('Dong Gang Thep','30','1','157','60',''),
+('Nguyen Quoc Anh','11','1','156','41',''),
+('Bui Thao Nhi','69','0','164','90',''),
+('Bui Hoang Khanh','65','1','140','47',''),
+('Tran Hoang Anh','91','0','146','35',''),
+('Nguyen Xuan Mai','20','0','150','44',''),
+('Nguyen Hoang','76','1','200','110','')
+
 
 insert into Food_list([Food_name], [Calories])
 values    
