@@ -1,4 +1,5 @@
-INSERT INTO Workout ( ExerciseID , ActivityID , Duration ) 
+use weight_tracker
+INSERT INTO Workout( [ExerciseID] , [ActivityID] , [Duration] ) 
 VALUES 
 ( '1 ','2','30'),
 ( '1 ','11','30'),
@@ -93,4 +94,4 @@ VALUES
 ( '30','7','45'),
 ( '30 ','11','45'),
 ( '30 ','25','45'),
-( '30','33','45'),
+( '30','33','45')

@@ -1,5 +1,5 @@
 use weight_tracker
-insert into Users (Username, passwords, email)
+insert into Users (Username, passwrd, email)
 values 
 ('S2jriStS7mKdRhjHJt0V','iYroVq3hGyZYXBeKf0mKQv','gS4VltlQIZPe9xgDmeHB@gmail.com'),
 ('JFEkVD2HG0XBeKf0mKQv','tqZXFmVuiroQKQYqK9g','9DsF26Up1E1D4V@sis.hust.edu.vn'),
@@ -23,9 +23,7 @@ values
 ('HOkyVSrLXjPR3b4isiwc','fJUffwmdNHAEVSrLXjPR3b4isiw','VLDw3NRb6chVS5lY@sis.hust.edu.vn')
 
 
-
-
-insert into Body_index(name, age, sex, height, weight,TDEE)
+insert into Body_index([Name], [Age], [Sex], [Height], [Weight], [TDEE])
 values
 ('Bui Dieu linh','65','0','197','68',''),
 ('Chi Van Linh','60','0','134','48',''),
