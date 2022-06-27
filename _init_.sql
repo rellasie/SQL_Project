@@ -57,7 +57,6 @@ create table Workout(
 	[ActivityID] int not null,
 	[Duration] int not null, /* time for each activity*/
 	[Outtake] int, /* Outtake = Activity * duration */
-	constraint workout_key primary key ([Number])
 );
 
 create table Daily_record(
