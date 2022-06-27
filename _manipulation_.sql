@@ -4,9 +4,6 @@ use weight_tracker
 update Body_index set [BMI] = [Weight]*10000/([Height]*[Height])
 select * from [Body_index]
 
-/*Update calorie balance for table daily record*/
-select [MenuID] from Daily_record
-select * from Menu
 
 /*Update Intake calo in table Menu*/
 update M 
@@ -31,7 +28,7 @@ drop table new_cal
 select * from new_cal
 select * from Daily_record
 
-/*Update Calories_balance*/
+/*Update Calories_balance in Body_index table*/
 select [UserID], max([Date]) as lasted_rec 
 into new_rec from Daily_record group by [UserID]
 
