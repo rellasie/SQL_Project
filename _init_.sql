@@ -1,6 +1,6 @@
 create database weight_tracker /*Run this first*/
 use weight_tracker /*After that, run this*/
-
+drop database weight_tracker
 /*Then run all lines below to create tables*/
 
 create table Users(
@@ -56,11 +56,7 @@ create table Activity_list(
 );
 
 create table Workout(
-<<<<<<< HEAD
-	[ExerciseID] int identity (1,1),
-=======
 	[ExerciseID] int identity(1,1),
->>>>>>> f9e5738d2e0b1ebaad5a7f80664034e057f2fc3e
 	[ActivityID] int not null,
 	[Duration] int not null, /* time for each activity*/
 	[Outtake] int, /* Outtake = Activity * duration */

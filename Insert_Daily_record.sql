@@ -30,4 +30,3 @@ values
 ('9','2021-08-30'),
 ('10','2020-05-8')
 
-select * from Daily_record

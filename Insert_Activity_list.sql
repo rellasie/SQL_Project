@@ -42,3 +42,4 @@ VaLUES
 ( 'Walking', '3'),
 ( 'Wrestling', '6'),
 ( 'Yoga', '3')
+

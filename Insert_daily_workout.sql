@@ -1,5 +1,5 @@
 use weight_tracker
-INSERT INTO Daily_Workout ([UserID], [Date], [ExerciseID], )
+INSERT INTO Daily_Workout ([UserID], [Date], [ExerciseID] )
 VALUES 
 ('1','2022-06-26','1'),
 ('1','2022-06-26','2'),
