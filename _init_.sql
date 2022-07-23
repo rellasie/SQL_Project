@@ -30,11 +30,7 @@ create table Food_list(
 );
 
 create table Menu(
-<<<<<<< HEAD
 	[MenuID] int identity (1,1),
-=======
-	[MenuID] int identity(1,1),
->>>>>>> f9e5738d2e0b1ebaad5a7f80664034e057f2fc3e
 	[FoodID] int not null,
 	[Amount] int not null, 
 	[Intake] int, /* Intake calories = Food(Calories) * Amount*/
