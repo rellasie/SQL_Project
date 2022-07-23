@@ -30,7 +30,7 @@ create table Food_list(
 );
 
 create table Menu(
-	[MenuID] int,
+	[MenuID] int identity(1,1),
 	[FoodID] int not null,
 	[Amount] int not null, 
 	[Intake] int, /* Intake calories = Food(Calories) * Amount*/
@@ -48,8 +48,6 @@ create table Daily_Menu(
 	constraint Example_menu foreign key ([MenuID]) references Menu([MenuID])
 );
 
-
-
 create table Activity_list(
 	[ActivityID] int identity(1,1),
 	[Activity_name] varchar(255) not null unique,
@@ -58,7 +56,7 @@ create table Activity_list(
 );
 
 create table Workout(
-	[ExerciseID] int,
+	[ExerciseID] int identity(1,1),
 	[ActivityID] int not null,
 	[Duration] int not null, /* time for each activity*/
 	[Outtake] int, /* Outtake = Activity * duration */
