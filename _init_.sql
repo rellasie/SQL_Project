@@ -1,8 +1,6 @@
 create database weight_tracker /*Run this first*/
 use weight_tracker /*After that, run this*/
 
-drop database weight_tracker 
-
 /*Then run all lines below to create tables*/
 
 create table Users(
@@ -58,9 +56,6 @@ create table Activity_list(
 	[Calories] int not null, /* The average amount of burnt calories for each min*/
 	constraint keyact primary key ([ActivityID])
 );
-
-
-
 
 create table Workout(
 	[ExerciseID] int,
