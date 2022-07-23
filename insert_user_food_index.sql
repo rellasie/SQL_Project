@@ -1,5 +1,6 @@
 use weight_tracker
-insert into Users (Username, passwrd, email)
+
+insert into Users (username, passwrd, email)
 values 
 ('S2jriStS7mKdRhjHJt0V','iYroVq3hGyZYXBeKf0mKQv','gS4VltlQIZPe9xgDmeHB@gmail.com'),
 ('JFEkVD2HG0XBeKf0mKQv','tqZXFmVuiroQKQYqK9g','9DsF26Up1E1D4V@sis.hust.edu.vn'),
