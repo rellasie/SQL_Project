@@ -16,8 +16,8 @@ create table Body_index(
 	[Name] varchar (255) not null unique,
 	[Sex] bit not null, /* 1 represent male, 0 represent female*/
 	[Age] int not null,
-	[Height] int not null,
-	[Weight] int not null,
+	[Height] float not null,
+	[Weight] float not null,
 	[BMI] float, 
 	[TDEE] float not null,
 	[Normal_cal_burn] int,
@@ -42,6 +42,8 @@ create table Menu(
 	[FoodID] int not null,
 	[Amount] int not null, 
 	[Intake] int, /* Intake calories = Food(Calories) * Amount*/
+	constraint keymenu primary key ([MenuID], [FoodID]),
+	constraint menu_food foreign key ([FoodID]) references Food_list([FoodID])
 );
 
 
@@ -57,6 +59,8 @@ create table Workout(
 	[ActivityID] int not null,
 	[Duration] int not null, /* time for each activity*/
 	[Outtake] int, /* Outtake = Activity * duration */
+	constraint keywork primary key ([ExerciseID], [ActivityID]),
+	constraint work_act foreign key ([ActivityID]) references Activity_list([ActivityID])
 );
 
 create table Daily_record(
