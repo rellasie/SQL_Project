@@ -30,7 +30,11 @@ create table Food_list(
 );
 
 create table Menu(
+<<<<<<< HEAD
 	[MenuID] int identity (1,1),
+=======
+	[MenuID] int identity(1,1),
+>>>>>>> f9e5738d2e0b1ebaad5a7f80664034e057f2fc3e
 	[FoodID] int not null,
 	[Amount] int not null, 
 	[Intake] int, /* Intake calories = Food(Calories) * Amount*/
@@ -56,7 +60,11 @@ create table Activity_list(
 );
 
 create table Workout(
+<<<<<<< HEAD
 	[ExerciseID] int identity (1,1),
+=======
+	[ExerciseID] int identity(1,1),
+>>>>>>> f9e5738d2e0b1ebaad5a7f80664034e057f2fc3e
 	[ActivityID] int not null,
 	[Duration] int not null, /* time for each activity*/
 	[Outtake] int, /* Outtake = Activity * duration */
@@ -98,5 +106,4 @@ create table Body_index(
 	constraint foreignkey1 foreign key ([UserID]) references Users([UserID]),
 	constraint foreignkey2 foreign key ([Tier]) references Suggestions([Tier])
 );
-
 

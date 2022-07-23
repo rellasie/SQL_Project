@@ -100,3 +100,44 @@ where F.[FoodID] = M.[FoodID] and D.[MenuID] = M.[MenuID] and D.[UserID] = B.[Us
 select B.[Name], B.[BMI], S.[Message] 
 from Body_index B, Suggestions S 
 where /*B.[Calories_balance] is not null  and */ B.[Tier] = S.[Tier] and B.[Name] = 'Tran Lyn Lyn'--- can be change with another name
+
+/*Register new user*/
+INSERT INTO Users(UserID ,username , email , passwrd ) 
+VALUES ( ' ',' ' ,' ' , ' '),
+( ' ',' ' ,' ' , ' ')
+/*Change PW */
+UPDATE  Users SET passwrd = ' ' WHERE UserID = ''
+
+/*Add food to Food_list*/
+INSERT INTO Food_list ( Food_name , Calories ) 
+VALUES ( ' ' , '' ),
+( ' ' , '' )
+
+/*Add activity to Activity_list*/
+INSERT INTO Activity_list ( Activity_name , Calories ) 
+VALUES ( ' ' , '' ),
+( ' ' , '' )
+
+/*Add a new menu*/
+declare @number_input int = 3; ---- number of dish in this menu
+
+declare @new_menuid int;
+set @new_menuid = (SELECT TOP 1 [MenuID] FROM Menu ORDER BY [MenuID] DESC) + 1;
+print @new_menuid
+go
+
+declare @temp_index int = 1;
+declare @add_foodid int;
+declare @add_amount int;
+WHILE @temp_index < @number_input
+BEGIN
+   insert into Menu([MenuID], [FoodID], [Amount]) ---- User input FoodID and their Amount
+   values
+   (@new_menuid, @add_foodid, @add_amount)
+
+   SET @temp_index = @temp_index + 1;
+END;
+
+/*Add a new excercise*/
+
+/*Add a new daily record*/
