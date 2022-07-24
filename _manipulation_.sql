@@ -1,5 +1,6 @@
 use weight_tracker
 
+
 /*Update BMI index = weight /(height^2) with weight in kg, height in m*/
 update Body_index set [BMI] = [Weight]*10000/([Height]*[Height])
 select * from [Body_index]
@@ -208,3 +209,33 @@ where [BMI] >=25 and ([Calories_balance]-[Normal_cal_burn]) >-50
 END
 GO
 
+--- SP to update Body_index after changing Weight, Height, Age, TDEE
+--- recalc BMI
+--- recalc Normal_cal_burn
+--- recalc Tier (using SP update_index)
+GO
+IF EXISTS(SELECT name FROM sysobjects
+WHERE name='recalc_index' AND type='P')
+DROP PROCEDURE recalc_index
+GO 
+CREATE PROCEDURE recalc_index 
+AS
+BEGIN
+--- recalc BMI
+update Body_index set [BMI] = [Weight]*10000/([Height]*[Height])
+select * from [Body_index]
+
+--- recalc Normal_cal_burn
+Update Body_index ---- height in cm, weight in kg
+set [Normal_cal_burn] = (6.25 *[Height] + 10*[Weight] - 4.92* [Age] + 5) * [TDEE] ---- for man
+where [Sex] = 1
+
+Update Body_index
+set [Normal_cal_burn] = (6.25 *[Height] + 10*[Weight] - 4.92* [Age] -95) * [TDEE] ---- for woman
+where [Sex] = 0
+
+---recalc Tier
+exec update_index
+
+END
+GO

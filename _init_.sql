@@ -42,7 +42,7 @@ create table Daily_Menu(
 	[UserID] int,
 	[Date] date,
 	[MenuID] int,
-	[cal_in] int,
+	--[cal_in] int, -- xoá vì ko cần 
 	constraint Daily_menu_record primary key ([UserID],[Date],[MenuID]),
 	constraint User_date_m foreign key ([UserID],[Date]) references Daily_record([UserID],[Date]),
 	constraint Example_menu foreign key ([MenuID]) references Menu([MenuID])
@@ -68,7 +68,7 @@ create table Daily_Workout(
 	[UserID] int,
 	[Date] date,
 	[ExerciseID] int,
-	[cal_burn] int,
+	-- [cal_burn] int, xoá vì không cần
 	constraint Daily_workout_record primary key ([UserID],[Date],[ExerciseID]),
 	constraint User_date_w foreign key ([UserID],[Date]) references Daily_record([UserID],[Date]),
 	constraint Example_Exercise foreign key ([ExerciseID]) references Workout([ExerciseID])
@@ -98,4 +98,3 @@ create table Body_index(
 	constraint foreignkey1 foreign key ([UserID]) references Users([UserID]),
 	constraint foreignkey2 foreign key ([Tier]) references Suggestions([Tier])
 );
-
