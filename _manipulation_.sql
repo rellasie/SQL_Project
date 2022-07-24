@@ -12,27 +12,19 @@ from Menu M
 inner join Food_list F
 on M.FoodID = F.FoodID
 
-/*Update Calorie Balance in table Daily Record */
-select M.MenuID, sum(M.Intake) as cal_result 
-into new_cal 
-from Menu as M group by M.MenuID
+/*Update Outtake calo in table Workout*/
+update W 
+set W.[Outtake] = W.[Duration] * A.[Calories] 
+from Workout W
+inner join Activity_list A
+on W.ActivityID = A.ActivityID
 
-update D
-set D.[Calories_balance] = N.[cal_result]
-from Daily_record D
-inner join new_cal N
-on D.MenuID = N.MenuID
-
-drop table new_cal
-
-select * from new_cal
-select * from Daily_record
 
 /*Update Calories_balance in Body_index table*/
 select [UserID], max([Date]) as lasted_rec 
 into new_rec from Daily_record group by [UserID]
 
-select * from new_rec
+---select * from new_rec
 
 alter table new_rec add lasted_calo int
 
@@ -138,6 +130,81 @@ BEGIN
    SET @temp_index = @temp_index + 1;
 END;
 
-/*Add a new excercise*/
 
-/*Add a new daily record*/
+
+
+
+-- Update DailyRecord
+update Dr
+set Dr.[Cal_in] = Calcin.[Calcsum]
+from [dbo].[Daily_record] Dr
+ inner join (select Dm.[UserID], Dm.[Date], sum(M.[Intake]) Calcsum
+from [dbo].[Daily_Menu] Dm inner join [dbo].[Menu] M
+on Dm.[MenuID] = M.[MenuID] 
+group by Dm.[UserID], Dm.[Date]) as Calcin
+on Calcin.[UserID] = Dr.[UserID] and Calcin.[Date] = Dr.[Date]
+
+update Dr
+set Dr.[Cal_burn] = Calcburn.[Calcsum]
+from [dbo].[Daily_record] Dr
+ inner join (select Dw.[UserID], Dw.[Date], sum(W.[Outtake]) Calcsum
+from [dbo].[Daily_Workout] Dw inner join [dbo].[Workout] W
+on Dw.[ExerciseID] = W.[ExerciseID] 
+group by Dw.[UserID], Dw.[Date]) as Calcburn
+on Calcburn.[UserID] = Dr.[UserID] and Calcburn.[Date] = Dr.[Date]
+
+update [dbo].[Daily_record]
+set [Calories_balance] = [Cal_in] - [Cal_burn]
+
+
+
+--- SP for update tier after adding new record
+GO
+IF EXISTS(SELECT name FROM sysobjects
+WHERE name='update_index' AND type='P')
+DROP PROCEDURE update_index
+GO
+CREATE PROCEDURE update_index --- update calo balance --> update index
+AS
+BEGIN
+select [UserID], max([Date]) as lasted_rec 
+into new_rec from Daily_record group by [UserID]
+
+alter table new_rec add lasted_calo int
+
+update R
+set R.[lasted_calo] = D.[Calories_balance]
+from new_rec R
+inner join Daily_record D
+on D.[UserID] = R.[UserID] and D.[Date] = R.[lasted_rec]
+
+update B
+set B.[Calories_balance] = R.[lasted_calo]
+from Body_index B
+inner join new_rec R
+on B.UserID = R.[UserID]
+
+drop table new_rec
+
+update Body_index
+set [tier] = 1
+where [BMI] < 18.5 and ([Calories_balance]-[Normal_cal_burn]) <50
+
+update Body_index
+set [tier] = 2
+where [BMI] <18.5 and ([Calories_balance]-[Normal_cal_burn]) >= 50
+
+update Body_index
+set [tier] = 3
+where [BMI] >= 18.5 and [BMI] <25
+
+update Body_index
+set [tier] = 4
+where [BMI] >= 25 and ([Calories_balance]-[Normal_cal_burn]) <-50
+
+update Body_index
+set [tier] = 5
+where [BMI] >=25 and ([Calories_balance]-[Normal_cal_burn]) >-50
+END
+GO
+
